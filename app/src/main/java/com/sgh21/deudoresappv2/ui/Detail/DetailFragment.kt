@@ -31,10 +31,9 @@ class DetailFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentDetailBinding.inflate(inflater, container, false)
         val root: View = binding.root
-        //binding.nameDetailsTextView.text = deudor.name
         return  root
     }
 
@@ -42,14 +41,18 @@ class DetailFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProvider(this).get(DetailViewModel::class.java)
         deudor = args.debtor
-
-        //binding.phoneDetailsTextView.text = deudor.phone
-        //binding.amountDetailsTextView.text = deudor.amount.toString()
+        actualizacion(deudor)
         Toast.makeText(
             requireContext(),
             deudor.name + " me debe " + deudor.amount.toString() + ", telefono: " + deudor.phone,
             Toast.LENGTH_SHORT
         ).show()
+    }
+
+    private fun actualizacion(deudor: Deudor) {
+        binding.nameDetailsTextView.text = deudor.name
+        binding.phoneDetailsTextView.text = deudor.phone
+        binding.amountDetailsTextView.text = deudor.amount.toString()
     }
 
 }
